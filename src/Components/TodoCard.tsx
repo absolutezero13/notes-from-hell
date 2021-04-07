@@ -8,10 +8,14 @@ import {
 } from "@material-ui/core";
 import { blue, green, grey, pink, red } from "@material-ui/core/colors";
 import { AddCircleOutlined } from "@material-ui/icons";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { context } from "../Context/Context";
 import Task from "./Task";
 
 const useStyles = makeStyles({
+  card: {
+    padding: "2rem",
+  },
   avatar: {
     backgroundColor: ({ category }: any) => {
       if (category === "friends") return green[500];
@@ -28,17 +32,20 @@ interface TodoCardProps {
 }
 const TodoCard: React.FC<TodoCardProps> = ({ title, category }) => {
   const classes = useStyles({ category });
+  const { tasks, setTasks } = useContext(context);
   const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState<string[]>([]);
 
   const addTask = () => {
     if (task) {
-      setTasks((prevTasks: string[]) => [...prevTasks, task]);
+      setTasks((prevTasks: any) => [
+        ...prevTasks,
+        { text: task, id: Math.random() },
+      ]);
       setTask("");
     }
   };
   return (
-    <Card>
+    <Card className={classes.card}>
       <CardHeader
         avatar={
           <Avatar className={classes.avatar}>
@@ -55,8 +62,8 @@ const TodoCard: React.FC<TodoCardProps> = ({ title, category }) => {
       <Button onClick={addTask}>
         <AddCircleOutlined />
       </Button>
-      {tasks.map((task) => {
-        return <Task task={task} />;
+      {tasks.map((task: any) => {
+        return <Task key={Math.random()} task={task} />;
       })}
     </Card>
   );
