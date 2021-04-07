@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import React from "react";
+import OpenPage from "./Pages/OpenPage";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import MainPage from "./Pages/MainPage";
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: "Quicksand",
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <OpenPage />
+          </Route>
+          <Route exact path="/main-page">
+            <MainPage />
+          </Route>
+        </Switch>
+      </Router>
+    </ThemeProvider>
   );
 }
 
