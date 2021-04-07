@@ -32,12 +32,12 @@ interface TodoCardProps {
 }
 const TodoCard: React.FC<TodoCardProps> = ({ title, category }) => {
   const classes = useStyles({ category });
-  const { tasks, setTasks } = useContext(context);
+  const [tasks, setTasks] = useState<any>([]);
   const [task, setTask] = useState("");
 
   const addTask = () => {
     if (task) {
-      setTasks((prevTasks: any) => [
+      setTasks((prevTasks: Object[]) => [
         ...prevTasks,
         { text: task, id: Math.random() },
       ]);
@@ -63,7 +63,7 @@ const TodoCard: React.FC<TodoCardProps> = ({ title, category }) => {
         <AddCircleOutlined />
       </Button>
       {tasks.map((task: any) => {
-        return <Task key={Math.random()} task={task} />;
+        return <Task key={Math.random()} task={task} setTasks={setTasks} />;
       })}
     </Card>
   );

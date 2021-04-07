@@ -8,10 +8,9 @@ interface TaskProps {
     text: string;
     id: number;
   };
+  setTasks: (task: any) => void;
 }
-const Task: React.FC<TaskProps> = ({ task }) => {
-  const { setTasks } = useContext(context);
-
+const Task: React.FC<TaskProps> = ({ task, setTasks }) => {
   const deleteTask = (id: number) => {
     setTasks((prevTasks: any) => {
       return prevTasks.filter((task: any) => id !== task.id);

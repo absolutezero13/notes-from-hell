@@ -16,6 +16,7 @@ const useStyles = makeStyles({
     maxWidth: 300,
     padding: "1rem 1rem",
     height: "100vh",
+    backgroundColor: "#f3f3f3",
   },
   cardContent: {
     display: "flex",
