@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 });
 
 interface todo {
-  title: string;
+  todoTitle: string;
   category: string;
 }
 const MainPage: React.FC = () => {
@@ -26,10 +26,12 @@ const MainPage: React.FC = () => {
   return (
     <div className={classes.mainPage}>
       <UserCard />
-      <CreateCard />
       {todos.map((todo: todo, i: number) => {
-        return <TodoCard key={i} title={todo.title} category={todo.category} />;
+        return (
+          <TodoCard key={i} title={todo.todoTitle} category={todo.category} />
+        );
       })}
+      <CreateCard />
     </div>
   );
 };

@@ -10,11 +10,7 @@ import {
   RadioGroup,
   TextField,
 } from "@material-ui/core";
-import {
-  AddCircleOutlined,
-  ArrowBackIos,
-  PersonPinCircleTwoTone,
-} from "@material-ui/icons";
+import { AddCircleOutlined } from "@material-ui/icons";
 import React, { useContext, useState } from "react";
 import { context } from "../Context/Context";
 
@@ -32,10 +28,13 @@ const CreateCard = () => {
 
   const submitHandler = (e: any) => {
     e.preventDefault();
-    const newTodo = { todoTitle, category };
-    setTodos((prevTodos: any) => [...prevTodos, newTodo]);
-    setTodoTitle("");
-    setCategory("");
+
+    if (category) {
+      const newTodo = { todoTitle, category };
+      setTodos((prevTodos: any) => [...prevTodos, newTodo]);
+      setTodoTitle("");
+      setCategory("");
+    }
   };
 
   return (
@@ -49,7 +48,7 @@ const CreateCard = () => {
             required
             label="Project Title"
           />
-
+          <FormLabel style={{ marginTop: "2rem" }}> Category </FormLabel>
           <RadioGroup
             value={category}
             onChange={(e) => setCategory(e.target.value)}
