@@ -1,7 +1,6 @@
-import { Button, Container, Typography } from "@material-ui/core";
+import { Button, Checkbox, Container, Typography } from "@material-ui/core";
 import { DeleteOutlineOutlined } from "@material-ui/icons";
-import React, { useContext } from "react";
-import { context } from "../Context/Context";
+import React from "react";
 
 interface TaskProps {
   task: {
@@ -26,6 +25,7 @@ const Task: React.FC<TaskProps> = ({ task, setTasks }) => {
       >
         Remove
       </Button>
+      <Checkbox checked={true} />
       <hr />
     </Container>
   );

@@ -5,25 +5,23 @@ export const context: any = createContext({});
 const GlobalProvider = ({ children }: any) => {
   const [todos, setTodos] = useState<any>([]);
   const [userInfo, setUserInfo] = useState({});
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem("todos")!);
+    setTodos(todos);
+  }, []);
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo")!);
+    setUserInfo(userInfo);
+  }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem("todos", JSON.stringify(todos));
-  // }, [todos]);
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
-  // useEffect(() => {
-  //   const todos = localStorage.getItem(JSON.parse("todos"));
+  useEffect(() => {
+    localStorage.setItem("userInfo", JSON.stringify(userInfo));
+  }, [userInfo]);
 
-  //   setTodos(todos);
-  // }, []);
-  // useEffect(() => {
-  //   localStorage.setItem("userInfo", JSON.stringify(userInfo));
-  // }, [userInfo]);
-
-  // useEffect(() => {
-  //   const userInfo = localStorage.getItem(JSON.parse("userInfo"));
-
-  //   setUserInfo(userInfo);
-  // }, []);
   return (
     <context.Provider value={{ userInfo, setUserInfo, setTodos, todos }}>
       {children}

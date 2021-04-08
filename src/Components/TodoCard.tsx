@@ -44,6 +44,7 @@ const TodoCard: React.FC<TodoCardProps> = ({ title, category }) => {
       setTask("");
     }
   };
+
   return (
     <Card className={classes.card}>
       <CardHeader
