@@ -15,6 +15,16 @@ import Task from "./Task";
 const useStyles = makeStyles({
   card: {
     padding: "2rem",
+    display: ({ isChecked, category }: any) => {
+      if (category === "friends" && !isChecked.checkedFriends) return "none";
+
+      if (!isChecked.checkedHobbies && category === "hobbies") return "none";
+      if (!isChecked.checkedSchool && category === "school") return "none";
+      if (!isChecked.checkedWork && category === "work") return "none";
+      else {
+        return "initial";
+      }
+    },
   },
   avatar: {
     backgroundColor: ({ category }: any) => {
@@ -29,11 +39,15 @@ const useStyles = makeStyles({
 interface TodoCardProps {
   title: string;
   category: string;
+  isChecked: {};
+  setIsChecked: any;
 }
-const TodoCard: React.FC<TodoCardProps> = ({ title, category }) => {
-  const classes = useStyles({ category });
+const TodoCard: React.FC<TodoCardProps> = ({ title, category, isChecked }) => {
+  const classes = useStyles({ category, isChecked });
   const [tasks, setTasks] = useState<any>([]);
   const [task, setTask] = useState("");
+
+  console.log(isChecked);
 
   const addTask = () => {
     if (task) {

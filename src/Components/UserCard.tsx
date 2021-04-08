@@ -27,8 +27,7 @@ const useStyles = makeStyles({
   },
 });
 
-const UserCard = () => {
-  const [category, setCategory] = useState("");
+const UserCard: React.FC<any> = ({ setIsChecked, isChecked }) => {
   const classes = useStyles();
   const { userInfo } = useContext(context);
 
@@ -41,22 +40,46 @@ const UserCard = () => {
       />
       <CardContent className={classes.cardContent}>
         <FormControlLabel
-          control={<Checkbox defaultChecked />}
+          onChange={() =>
+            setIsChecked((prevChecks: any) => ({
+              ...prevChecks,
+              checkedWork: !isChecked.checkedWork,
+            }))
+          }
+          control={<Checkbox checked={isChecked.checkedWork} />}
           label="Work"
           value="work"
         />
         <FormControlLabel
-          control={<Checkbox defaultChecked />}
+          onChange={() =>
+            setIsChecked((prevChecks: any) => ({
+              ...prevChecks,
+              checkedSchool: !isChecked.checkedSchool,
+            }))
+          }
+          control={<Checkbox checked={isChecked.checkedSchool} />}
           label="School"
           value="school"
         />
         <FormControlLabel
-          control={<Checkbox defaultChecked />}
+          onChange={() =>
+            setIsChecked((prevChecks: any) => ({
+              ...prevChecks,
+              checkedHobbies: !isChecked.checkedHobbies,
+            }))
+          }
+          control={<Checkbox checked={isChecked.checkedHobbies} />}
           label="Hobbies"
           value="hobbies"
         />
         <FormControlLabel
-          control={<Checkbox defaultChecked />}
+          onChange={() =>
+            setIsChecked((prevChecks: any) => ({
+              ...prevChecks,
+              checkedFriends: !isChecked.checkedFriends,
+            }))
+          }
+          control={<Checkbox checked={isChecked.checkedFriends} />}
           label="Friends"
           value="friends"
         />

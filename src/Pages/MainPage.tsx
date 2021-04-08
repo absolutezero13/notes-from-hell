@@ -1,6 +1,6 @@
 import classes from "*.module.css";
 import { makeStyles } from "@material-ui/core";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import CreateCard from "../Components/CreateCard";
 import TodoCard from "../Components/TodoCard";
 import UserCard from "../Components/UserCard";
@@ -20,15 +20,26 @@ interface todo {
 }
 const MainPage: React.FC = () => {
   const classes = useStyles();
-  const { userInfo } = useContext(context);
   const { todos } = useContext(context);
+  const [isChecked, setIsChecked] = useState({
+    checkedWork: true,
+    checkedFriends: true,
+    checkedSchool: true,
+    checkedHobbies: true,
+  });
 
   return (
     <div className={classes.mainPage}>
-      <UserCard />
+      <UserCard isChecked={isChecked} setIsChecked={setIsChecked} />
       {todos.map((todo: todo, i: number) => {
         return (
-          <TodoCard key={i} title={todo.todoTitle} category={todo.category} />
+          <TodoCard
+            key={i}
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+            title={todo.todoTitle}
+            category={todo.category}
+          />
         );
       })}
       <CreateCard />
