@@ -13,7 +13,7 @@ import { context } from "../Context/Context";
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 300,
+    width: 300,
     padding: "1rem 1rem",
     height: "100vh",
     backgroundColor: "#f3f3f3",

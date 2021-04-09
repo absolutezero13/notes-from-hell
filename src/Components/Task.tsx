@@ -18,14 +18,12 @@ const Task: React.FC<TaskProps> = ({ task, setTasks }) => {
 
   return (
     <Container>
-      <Typography variant="h6"> {task.text} </Typography>
+      <Typography variant="body1"> {task.text} </Typography>
       <Button
         onClick={() => deleteTask(task.id)}
         endIcon={<DeleteOutlineOutlined />}
-      >
-        Remove
-      </Button>
-      <Checkbox checked={true} />
+      ></Button>
+      <Checkbox />
       <hr />
     </Container>
   );

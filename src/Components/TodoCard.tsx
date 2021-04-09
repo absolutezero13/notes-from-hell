@@ -2,12 +2,13 @@ import {
   Avatar,
   Button,
   Card,
+  CardContent,
   CardHeader,
   makeStyles,
   TextField,
 } from "@material-ui/core";
 import { blue, green, grey, pink, red } from "@material-ui/core/colors";
-import { AddCircleOutlined } from "@material-ui/icons";
+import { AddCircleOutlined, DeleteForeverOutlined } from "@material-ui/icons";
 import React, { useContext, useState } from "react";
 import { context } from "../Context/Context";
 import Task from "./Task";
@@ -44,10 +45,9 @@ interface TodoCardProps {
 }
 const TodoCard: React.FC<TodoCardProps> = ({ title, category, isChecked }) => {
   const classes = useStyles({ category, isChecked });
+  const { setTodos } = useContext(context);
   const [tasks, setTasks] = useState<any>([]);
   const [task, setTask] = useState("");
-
-  console.log(isChecked);
 
   const addTask = () => {
     if (task) {
@@ -57,6 +57,12 @@ const TodoCard: React.FC<TodoCardProps> = ({ title, category, isChecked }) => {
       ]);
       setTask("");
     }
+  };
+
+  const deleteTodo = (title: string) => {
+    setTodos((prevTodos: any) => {
+      return prevTodos.filter((todo: any) => todo.todoTitle !== title);
+    });
   };
 
   return (
@@ -69,17 +75,23 @@ const TodoCard: React.FC<TodoCardProps> = ({ title, category, isChecked }) => {
         }
         title={title}
       />
-      <TextField
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-        label="What to do?"
-      />
-      <Button onClick={addTask}>
-        <AddCircleOutlined />
+      <CardContent>
+        <TextField
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+          label="What to do?"
+        />
+        <Button onClick={addTask}>
+          <AddCircleOutlined />
+        </Button>
+        {tasks.map((task: any) => {
+          return <Task key={Math.random()} task={task} setTasks={setTasks} />;
+        })}
+      </CardContent>
+
+      <Button onClick={() => deleteTodo(title)}>
+        <DeleteForeverOutlined />
       </Button>
-      {tasks.map((task: any) => {
-        return <Task key={Math.random()} task={task} setTasks={setTasks} />;
-      })}
     </Card>
   );
 };

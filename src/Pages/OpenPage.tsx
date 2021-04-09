@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import { ArrowForwardIos } from "@material-ui/icons";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { context } from "../Context/Context";
 
@@ -37,6 +37,12 @@ const OpenPage: React.FC = () => {
   const [surName, setSurName] = useState<string>("");
   const { setUserInfo } = useContext(context);
   const history = useHistory();
+
+  useEffect(() => {
+    if (name && surName) {
+      history.push("/main-page");
+    }
+  }, []);
 
   const submitHandler = (e: any) => {
     e.preventDefault();
