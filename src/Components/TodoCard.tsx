@@ -35,6 +35,10 @@ const useStyles = makeStyles({
       if (category === "work") return grey[500];
     },
   },
+  content: {
+    display: "flex",
+    alignItems: "center",
+  },
 });
 
 interface TodoCardProps {
@@ -75,7 +79,7 @@ const TodoCard: React.FC<TodoCardProps> = ({ title, category, isChecked }) => {
         }
         title={title}
       />
-      <CardContent>
+      <CardContent className={classes.content}>
         <TextField
           value={task}
           onChange={(e) => setTask(e.target.value)}
@@ -84,10 +88,10 @@ const TodoCard: React.FC<TodoCardProps> = ({ title, category, isChecked }) => {
         <Button onClick={addTask}>
           <AddCircleOutlined />
         </Button>
-        {tasks.map((task: any) => {
-          return <Task key={Math.random()} task={task} setTasks={setTasks} />;
-        })}
       </CardContent>
+      {tasks.map((task: any) => {
+        return <Task key={Math.random()} task={task} setTasks={setTasks} />;
+      })}
 
       <Button onClick={() => deleteTodo(title)}>
         <DeleteForeverOutlined />

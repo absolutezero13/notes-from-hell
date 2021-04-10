@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { ArrowForwardIos } from "@material-ui/icons";
+import { userInfo } from "node:os";
 
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
@@ -35,12 +36,16 @@ const OpenPage: React.FC = () => {
   const classes = useStyles();
   const [name, setName] = useState<string>("");
   const [surName, setSurName] = useState<string>("");
-  const { setUserInfo } = useContext(context);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const { setUserInfo, userInfo } = useContext(context);
   const history = useHistory();
 
   useEffect(() => {
-    if (name && surName) {
-      history.push("/main-page");
+    if (userInfo.name && userInfo.surName) {
+      setIsLoggedIn(true);
+      setTimeout(() => {
+        history.push("/main-page");
+      }, 1500);
     }
   }, []);
 
@@ -85,6 +90,11 @@ const OpenPage: React.FC = () => {
           Let's Go!
         </Button>
       </form>
+      {isLoggedIn && (
+        <Typography variant="body1">
+          ALREADY LOGGED IN. REDIRECTING...
+        </Typography>
+      )}
     </Container>
   );
 };
