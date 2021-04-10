@@ -1,5 +1,5 @@
 import classes from "*.module.css";
-import { makeStyles } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import React, { useContext, useState } from "react";
 import CreateCard from "../Components/CreateCard";
 import TodoCard from "../Components/TodoCard";
@@ -31,17 +31,19 @@ const MainPage: React.FC = () => {
   return (
     <div className={classes.mainPage}>
       <UserCard isChecked={isChecked} setIsChecked={setIsChecked} />
-      {todos.map((todo: todo, i: number) => {
-        return (
-          <TodoCard
-            key={i}
-            isChecked={isChecked}
-            setIsChecked={setIsChecked}
-            title={todo.todoTitle}
-            category={todo.category}
-          />
-        );
-      })}
+      <Grid container>
+        {todos.map((todo: todo, i: number) => {
+          return (
+            <TodoCard
+              key={i}
+              isChecked={isChecked}
+              setIsChecked={setIsChecked}
+              title={todo.todoTitle}
+              category={todo.category}
+            />
+          );
+        })}
+      </Grid>
       <CreateCard />
     </div>
   );

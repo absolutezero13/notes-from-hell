@@ -15,6 +15,8 @@ import Task from "./Task";
 
 const useStyles = makeStyles({
   card: {
+    width: "20rem",
+
     padding: "2rem",
     display: ({ isChecked, category }: any) => {
       if (category === "friends" && !isChecked.checkedFriends) return "none";
@@ -23,9 +25,11 @@ const useStyles = makeStyles({
       if (!isChecked.checkedSchool && category === "school") return "none";
       if (!isChecked.checkedWork && category === "work") return "none";
       else {
-        return "initial";
+        return "flex";
       }
     },
+    flexDirection: "column",
+    flexWrap: "wrap",
   },
   avatar: {
     backgroundColor: ({ category }: any) => {
