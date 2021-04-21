@@ -13,14 +13,12 @@ import { context } from "../Context/Context";
 
 const useStyles = makeStyles({
   card: {
-    width: 300,
     padding: "1rem 1rem",
-    height: "100vh",
     backgroundColor: "#f3f3f3",
   },
   cardContent: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
   },
   cardHeader: {
     fontWeight: 700,
